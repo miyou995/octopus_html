@@ -14,6 +14,7 @@ class Business(models.Model):
     about        = tinymce_models.HTMLField(verbose_name='Text a propos', blank=True, null=True)
     facebook     = models.URLField(verbose_name="Lien page Facebook", max_length=300, blank=True, null=True)
     insta        = models.URLField(verbose_name="Lien page Instagram", max_length=300, blank=True, null=True)
+    linkedin     = models.URLField(verbose_name="Lien page LinkedIn", max_length=300, blank=True, null=True)
     # actif  = models.BooleanField(verbose_name='Active', default=False)
     # is_big  = models.BooleanField(verbose_name='Grande photo (1920 x 570)', default=False)
     # is_small  = models.BooleanField(verbose_name='Medium photo (720 x 540)', default=False)

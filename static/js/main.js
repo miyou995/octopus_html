@@ -311,7 +311,9 @@ Index All JS
             $('.header--sticky').addClass('sticky')
             $('.light-logo').addClass('d-none')
             $('.dark-logo').removeClass('d-none')
+            $('.remove-yellow').removeClass('yellow')
         }else{
+            $('.remove-yellow').addClass('yellow')
             $('.dark-logo').addClass('d-none')
             $('.light-logo').removeClass('d-none')
             $('.header--sticky').removeClass('sticky')

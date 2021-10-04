@@ -42,6 +42,7 @@
         <!-- Start Header -->
         <header class="header-area formobile-menu header--transparent black-logo-version header--sticky">
             <div class="header-wrapper" id="header-wrapper">
+                
                 <div class="header-left">
                     <div class="logo">
                         <a href="{% url 'core:index' %}">
@@ -53,7 +54,7 @@
                 <div class="header-right">
                     <div class="mainmenunav d-lg-block">
                         <!-- Start Mainmanu Nav -->
-                        <nav class="main-menu-navbar">
+                        <nav class="main-menu-navbar mr-4">
                             <ul class="mainmenu">
                                 <li class="">
                                     <a href="{% url 'core:index' %}">Acceuil</a>
@@ -83,8 +84,22 @@
                         </nav>
                         <!-- End Mainmanu Nav -->
                     </div>
+                    <div class="social-share-inner">
+                        <ul class="social-share social-style--2 color-black d-flex justify-content-start liststyle">
+                            {% if business.facebook %}
+                                <li ><a href="{{business.facebook}}" target="_blank"><i class="remove-yellow yellow fab fa-facebook-f"></i></a></li>
+                            {% endif %}
+                            {% if business.linkedin %}
+                                <li ><a href="{{business.linkedin}}" target="_blank"><i class="remove-yellow yellow fab fa-linkedin-in"></i></a></li>
+                            {% endif %}
+                            {% if business.insta %}
+                                <li ><a href="{{business.insta}}" target="_blank"><i class="remove-yellow yellow fab fa-instagram"></i></a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+
                     <div class="header-btn">
-                        <a class="rn-btn" href="#">
+                        <a class="rn-btn" href="mailto:{{business.email}}">
                             <span>Email Rapide</span>
                         </a>
                     </div>
@@ -148,9 +163,16 @@
     
                                             <div class="social-share-inner">
                                                 <ul class="social-share social-style--2 d-flex justify-content-start liststyle mt--15">
-                                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                                    {% if business.facebook %}
+                                                    <li ><a href="{{business.facebook}}" target="_blank"><i class="remove-yellow yellow fab fa-facebook-f"></i></a></li>
+                                                {% endif %}
+                                                {% if business.linkedin %}
+                                                    <li ><a href="{{business.linkedin}}" target="_blank"><i class="remove-yellow yellow fab fa-linkedin-in"></i></a></li>
+                                                {% endif %}
+                                                {% if business.insta %}
+                                                    <li ><a href="{{business.insta}}" target="_blank"><i class="remove-yellow yellow fab fa-instagram"></i></a></li>
+                                                {% endif %}
+                                                </ul>
                                                 </ul>
                                             </div>
                                         </div>
@@ -177,9 +199,15 @@
                     <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="inner text-center">
                             <ul class="social-share rn-lg-size d-flex justify-content-center liststyle">
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                            {% if business.facebook %}
+                                <li ><a href="{{business.facebook}}" target="_blank"><i class="remove-yellow yellow fab fa-facebook-f"></i></a></li>
+                            {% endif %}
+                            {% if business.linkedin %}
+                                <li ><a href="{{business.linkedin}}" target="_blank"><i class="remove-yellow yellow fab fa-linkedin-in"></i></a></li>
+                            {% endif %}
+                            {% if business.insta %}
+                                <li ><a href="{{business.insta}}" target="_blank"><i class="remove-yellow yellow fab fa-instagram"></i></a></li>
+                            {% endif %}
                             </ul>
                         </div>
                     </div>
