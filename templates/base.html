@@ -35,6 +35,26 @@
         <link rel="stylesheet" href="{% static "css/vendor/lightbox.css" %}">
         <link rel="stylesheet" href="{% static "css/plugins/plugins.css" %}">
         <link rel="stylesheet" href="{% static "css/style.css" %}">
+        {% if business.messenger %}
+            <script>
+            {{business.messenger|safe}}
+            </script>
+        {% endif %}
+        {% if business.pixel %}
+            <script>
+            {{business.pixel|safe}}
+            </script>
+        {% endif %}
+        {% if business.analytics %}
+            <script>
+            {{business.analytics|safe}}
+            </script>
+        {% endif %}
+        {% if business.analytics2 %}
+            <script>
+            {{business.analytics2|safe}}
+            </script>
+        {% endif %}
     </head>
 <body>
     
