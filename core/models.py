@@ -48,13 +48,13 @@ class Service(models.Model):
 # class Article(models.Model):
 #     pass                    
 
-class ContactForm(models.Model):
+class Contact(models.Model):
     name        = models.CharField(verbose_name=_('Nom complet'), max_length=100)
     phone       = models.CharField(verbose_name=_("Téléphone") , max_length=25)
-    email       = models.EmailField(verbose_name=_("Email"), null=True, blank = True)
-    subject     = models.CharField(verbose_name=_("Sujet"), max_length=50, blank=True)
+    email       = models.EmailField(verbose_name=_("Email"), null=True, blank =True)
+    subject     = models.CharField(verbose_name=_("Sujet"), max_length=50, blank=True,null=True)
     message     = models.TextField(verbose_name=_("Message"), blank=True, null=True)
-    date_sent = models.DateTimeField(verbose_name=_("Date"), auto_now_add=True)
+    date_sent   = models.DateTimeField(verbose_name=_("Date"), auto_now_add=True)
     def __str__(self):
         return self.name
     class Meta:

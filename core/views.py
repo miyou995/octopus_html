@@ -2,7 +2,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import TemplateView, DetailView, ListView, CreateView
 from django.views.generic.base import RedirectView
-from .models import Quote, Service
+from .models import Quote, Service, Contact
 from .forms  import ContactForm
 from django.core.mail import EmailMessage
 from django.views.generic.edit import FormView
@@ -48,15 +48,16 @@ class ContactView(FormView):
             phone = form.cleaned_data['phone']
             subject = form.cleaned_data['subject']
             message = form.cleaned_data['message']
-            recipients = ['hello@newoppportunitygc.com']
+            recipients = ['hello@octopus-consulting.com']
             body = 'Nom: {} \n email: {} \n Phone:{} \n Sujet: {} \n Message: {}' .format(name, email, phone, subject, message)
-            mail = EmailMessage('Cet email est envoyer depuis le site internet', body, 'inter.taki@gmail.com', [recipients]) 
+            mail = EmailMessage('Cet email est envoyer depuis le site internet', body, 'octopus.emailing@gmail.com', recipients) 
+            Contact.objects.create(name= name ,email= email ,phone= phone ,subject= subject ,message = message )
             try:
                 mail.send()
                 return HttpResponse('Merci ! votre message a été envoyer avec succée')
             except:
                 return HttpResponse('Oups ! une erreur est survenue, veuiller vérifier vos informations SVP.')
         else :
-            return HttpResponse('Oups ! une erreur est survenue, veuiller vérifier vos informations SVP.')
+            return HttpResponse('Oups ! veuiller vérifier vos informations SVP.')
 
 

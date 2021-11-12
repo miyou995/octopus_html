@@ -178,22 +178,20 @@ CART_SESSION_ID = 'cart'
 # ==============================================================================
 # THIRD-PARTY SETTINGS
 # ==============================================================================
-if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-else:
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = 'smtp.gmail.com'
-    EMAIL_PORT = 587
-    SERVER_EMAIL = 'octopus.emailing@gmail.com'
-    EMAIL_HOST_USER = 'octopus.emailing@gmail.com'
-    EMAIL_HOST_PASSWORD = 'miyou0209'
 
-    EMAIL_USE_TLS = True
-    EMAIL_USE_SSL = False
+EMAIL_BACKEND  = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+SERVER_EMAIL = 'octopus.emailing@gmail.com'
+EMAIL_HOST_USER = 'octopus.emailing@gmail.com'
+EMAIL_HOST_PASSWORD = 'Mi.you20905991'
+
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
 
 
 # ==============================================================================
 # FIRST-PARTY SETTINGS
 # ==============================================================================
 
-sunlab_ENVIRONMENT = config("sunlab_ENVIRONMENT", default="local")
+# sunlab_ENVIRONMENT = config("sunlab_ENVIRONMENT", default="local")

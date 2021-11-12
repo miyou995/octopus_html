@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ContactForm, Category, Solution, Service, Quote
+from .models import Contact, Category, Solution, Service, Quote
 from django.contrib.auth.models import Group, User
 from django.utils.html import format_html
 
@@ -8,12 +8,13 @@ admin.site.enable_nav_sidebar = False
 admin.site.unregister(Group)
 
 
-class ContactFormAdmin(admin.ModelAdmin):
+class ContactAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
     list_display_links = ('id',)
     list_per_page = 40
     list_filter = ('name', 'phone', 'email',)
     search_fields = ('id', 'phone', 'email')
+    readonly_fields = ('date_sent',)
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -38,7 +39,7 @@ class QuoteAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Quote, QuoteAdmin)
-admin.site.register(ContactForm, ContactFormAdmin)
+admin.site.register(Contact, ContactAdmin)
 admin.site.register(Category, CategoryAdmin)
 # admin.site.register(Solution, SolutionAdmin)
 admin.site.register(Service, ServiceAdmin)
