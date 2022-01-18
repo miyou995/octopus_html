@@ -16,12 +16,12 @@ class Business(models.Model):
     facebook     = models.URLField(verbose_name="Lien page Facebook", max_length=300, blank=True, null=True)
     insta        = models.URLField(verbose_name="Lien page Instagram", max_length=300, blank=True, null=True)
     linkedin     = models.URLField(verbose_name="Lien page LinkedIn", max_length=300, blank=True, null=True)
-    messenger    = models.TextField(verbose_name='Facebook Messenger', blank=True, null=True)
-    pixel        = models.TextField(verbose_name='Facebook Pixel', blank=True, null=True)
-    analytics    = models.TextField(verbose_name='Google Analytics', blank=True, null=True)
-    analytics2   = models.TextField(verbose_name='Analytics 2', blank=True, null=True)
+    messenger    = MarkdownxField(verbose_name='Facebook Messenger', blank=True, null=True)
+    pixel        = MarkdownxField(verbose_name='Facebook Pixel', blank=True, null=True)
+    analytics    = MarkdownxField(verbose_name='Google Analytics', blank=True, null=True)
+    analytics2   = MarkdownxField(verbose_name='Analytics 2', blank=True, null=True)
     messenger_script = MarkdownxField()
-    
+
     # actif  = models.BooleanField(verbose_name='Active', default=False)
     # is_big  = models.BooleanField(verbose_name='Grande photo (1920 x 570)', default=False)
     # is_small  = models.BooleanField(verbose_name='Medium photo (720 x 540)', default=False)
