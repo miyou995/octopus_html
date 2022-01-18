@@ -2,7 +2,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import TemplateView, DetailView, ListView, CreateView
 from django.views.generic.base import RedirectView
-from .models import Quote, Service, Contact
+from .models import Quote, Service, Contact, Client
 from .forms  import ContactForm
 from django.core.mail import EmailMessage
 from django.views.generic.edit import FormView

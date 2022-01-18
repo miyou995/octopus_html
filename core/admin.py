@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Contact, Category, Solution, Service, Quote
+from .models import Client, Contact, Category, Solution, Service, Quote
 from django.contrib.auth.models import Group, User
 from django.utils.html import format_html
 
@@ -38,8 +38,14 @@ class QuoteAdmin(admin.ModelAdmin):
     list_per_page = 40
 
 
+class ClientAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
+    list_display_links = ('id','name')
+    list_per_page = 40
+
 admin.site.register(Quote, QuoteAdmin)
 admin.site.register(Contact, ContactAdmin)
+admin.site.register(Client, ClientAdmin)
 admin.site.register(Category, CategoryAdmin)
 # admin.site.register(Solution, SolutionAdmin)
 admin.site.register(Service, ServiceAdmin)
