@@ -28,6 +28,8 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
     'import_export',
     'tinymce',
+    'markdownx',
+
 ]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

@@ -9,6 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("core.urls")),
     path("robots.txt",TemplateView.as_view(template_name="robots.txt", content_type="text/plain")), 
+    path('markdownx/', include('markdownx.urls'))
 ]
 
 urlpatterns += static(base.STATIC_URL, document_root=base.STATIC_ROOT)

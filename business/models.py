@@ -1,5 +1,6 @@
 from django.db import models
 from tinymce import models as tinymce_models
+from markdownx.models import MarkdownxField
 
 from django.core.exceptions import ValidationError
 # Create your models here.
@@ -19,6 +20,8 @@ class Business(models.Model):
     pixel        = models.TextField(verbose_name='Facebook Pixel', blank=True, null=True)
     analytics    = models.TextField(verbose_name='Google Analytics', blank=True, null=True)
     analytics2   = models.TextField(verbose_name='Analytics 2', blank=True, null=True)
+    messenger_script = MarkdownxField()
+    
     # actif  = models.BooleanField(verbose_name='Active', default=False)
     # is_big  = models.BooleanField(verbose_name='Grande photo (1920 x 570)', default=False)
     # is_small  = models.BooleanField(verbose_name='Medium photo (720 x 540)', default=False)

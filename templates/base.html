@@ -34,11 +34,7 @@
         <link rel="stylesheet" href="{% static "css/vendor/lightbox.css" %}">
         <link rel="stylesheet" href="{% static "css/plugins/plugins.css" %}">
         <link rel="stylesheet" href="{% static "css/style.css" %}">
-        {% if business.messenger %}
-            <script>
-            {{business.messenger|safe}}
-            </script>
-        {% endif %}
+        
         {% if business.pixel %}
             <script>
             {{business.pixel|safe}}
@@ -56,7 +52,7 @@
         {% endif %}
     </head>
 <body>
-    
+   
     <div class="main-page">
         <!-- Start Header -->
         <header class="header-area formobile-menu header--transparent black-logo-version header--sticky">
@@ -259,7 +255,9 @@
     <!-- Main JS -->
     <script src="{% static "js/main.js" %}"></script>
 
-
+    {% if business.messenger_script %}
+        {{business.messenger_script|safe}}
+    {% endif %}
 </body>
 
 </html>
