@@ -1,6 +1,5 @@
 from pathlib import Path
 
-import dj_database_url
 from decouple import Csv, config
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -197,3 +196,8 @@ EMAIL_USE_SSL = False
 # ==============================================================================
 
 # sunlab_ENVIRONMENT = config("sunlab_ENVIRONMENT", default="local")
+try:
+    from .local_settings import *
+except ImportError:
+    pass
+

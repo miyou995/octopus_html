@@ -36,9 +36,7 @@
         <link rel="stylesheet" href="{% static "css/style.css" %}">
         
         {% if business.pixel %}
-            <script>
             {{business.pixel|safe}}
-            </script>
         {% endif %}
         {% if business.analytics %}
             <script>
