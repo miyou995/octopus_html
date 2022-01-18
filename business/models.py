@@ -17,6 +17,8 @@ class Business(models.Model):
     insta        = models.URLField(verbose_name="Lien page Instagram", max_length=300, blank=True, null=True)
     linkedin     = models.URLField(verbose_name="Lien page LinkedIn", max_length=300, blank=True, null=True)
     messenger    = MarkdownxField(verbose_name='Facebook Messenger', blank=True, null=True)
+    tag_header    = MarkdownxField(verbose_name='Google tag manager header', blank=True, null=True)
+    tag_body    = MarkdownxField(verbose_name='Google tag manager body', blank=True, null=True)
     pixel        = MarkdownxField(verbose_name='Facebook Pixel', blank=True, null=True)
     analytics    = MarkdownxField(verbose_name='Google Analytics', blank=True, null=True)
     analytics2   = MarkdownxField(verbose_name='Analytics 2', blank=True, null=True)

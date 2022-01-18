@@ -34,7 +34,9 @@
         <link rel="stylesheet" href="{% static "css/vendor/lightbox.css" %}">
         <link rel="stylesheet" href="{% static "css/plugins/plugins.css" %}">
         <link rel="stylesheet" href="{% static "css/style.css" %}">
-        
+        {% if business.tag_header %}
+            {{business.tag_header|safe}}
+        {% endif %}
         {% if business.pixel %}
             {{business.pixel|safe}}
         {% endif %}
@@ -50,7 +52,9 @@
         {% endif %}
     </head>
 <body>
-   
+    {% if business.tag_body %}
+        {{business.tag_body|safe}}
+    {% endif %}
     <div class="main-page">
         <!-- Start Header -->
         <header class="header-area formobile-menu header--transparent black-logo-version header--sticky">
