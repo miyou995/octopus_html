@@ -2,11 +2,18 @@ from django.http.response import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import TemplateView, DetailView, ListView, CreateView
 from django.views.generic.base import RedirectView
-from .models import Quote, Service, Contact, Client
-from .forms  import ContactForm
+
+from business.models import Business
+from .models import Invoice, Quote, Service, Contact, Client
+from .forms  import ContactForm, InvoiceCreateForm
 from django.core.mail import EmailMessage
 from django.views.generic.edit import FormView
 from django.urls import reverse_lazy
+from django.contrib.admin.views.decorators import staff_member_required
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
+from config.decorators import user_created_order
+import weasyprint
 
 
 class IndexView(TemplateView):
@@ -16,7 +23,9 @@ class IndexView(TemplateView):
         context["services"] = Service.objects.filter(priority__range=[1,6])
         context["quotes"] = Quote.objects.all()
         return context
-    
+
+
+
 #  STATIC
 class ServiceDetailView(DetailView):
     model = Service
@@ -61,3 +70,39 @@ class ContactView(FormView):
             return HttpResponse('Oups ! veuiller vérifier vos informations SVP.')
 
 
+@staff_member_required
+def admin_order_detail(request, order_id):
+    print('admin_order_detail ')
+    order = get_object_or_404(Invoice, id=order_id)
+    return render(request, 'order_detail.html', {'order': order})
+
+@staff_member_required
+def admin_order_pdf(request, invoice_id):
+    invoice = get_object_or_404(Invoice, id=invoice_id)
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'filename=order_{invoice.id}.pdf'
+    try :
+        business = Business.objects.first().name
+    except: 
+        business = "Octopus Consulting"
+    html = render_to_string('order_pdf.html' , {'invoice' : invoice, 'business': business})
+    # stylesheets=[weasyprint.CSS(str(configs.STATIC_ROOT) + 'css/pdf.css' )]
+    weasyprint.HTML(string=html, base_url=request.build_absolute_uri()).write_pdf(response)
+    return response
+
+@user_created_order
+def invoice_pdf(request, order_id):
+    order = get_object_or_404(Invoice, id=order_id)
+    if request.user == order.user:
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = f'filename=order_{order.id}.pdf'
+        try :
+            business   = Business.objects.first().name
+        except: 
+            business = " Octopus Consulting"
+        # generate pdf
+        html = render_to_string('order_pdf.html' , {'order' : order, 'business': business})
+        # stylesheets=[weasyprint.CSS(settings.STATIC_ROOT + 'css/pdf.css')]
+        weasyprint.HTML(string=html, base_url=request.build_absolute_uri()).write_pdf(response)
+        return response
+    return redirect('admin:index')

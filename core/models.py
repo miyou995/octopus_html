@@ -5,7 +5,6 @@ from tinymce import models as tinymce_models
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 
-
 class ActiveManager(models.Manager):
     def active(self):
         return self.filter(active=True)
@@ -82,13 +81,15 @@ class Client(models.Model):
 
 
 class Invoice(models.Model):
-    client          =  models.CharField(max_length=300,verbose_name='Description')
-    client_rc       = models.CharField(max_length=300,verbose_name='Description')
-    client_nif      =models.CharField(max_length=300,verbose_name='Description')
-    client_art      =models.CharField(max_length=300,verbose_name='Description')
-    client_adresse  =models.CharField(max_length=300,verbose_name='Description')
+    client          = models.CharField(max_length=300,verbose_name='Client')
+    client_rc       = models.CharField(max_length=300,verbose_name='RC Client')
+    client_nif      = models.CharField(max_length=300,verbose_name='Nif Client')
+    client_art      = models.CharField(max_length=300,verbose_name="Numéro d'article du client")
+    client_adresse  = models.CharField(max_length=300,verbose_name='Adresse Client')
+    client_phone    = models.CharField(max_length=300,verbose_name='Téléphone Client')
+    client_email    = models.EmailField(max_length=300,verbose_name='Email Client')
     invoice_number  = models.IntegerField(verbose_name='Numéro de facture')
-
+    invioce_date    = models.DateField(verbose_name=_("Date "), blank = True, null = True) 
     created       = models.DateTimeField(auto_now_add=True, verbose_name=_("Crée"))
     updated       = models.DateTimeField(auto_now=True, verbose_name=_("Modifié"))
     note          = models.TextField(blank=True, null=True, verbose_name=_("Note"))
@@ -96,7 +97,28 @@ class Invoice(models.Model):
     discount      = models.DecimalField( max_digits=10, decimal_places=2, default=0, verbose_name="Réduction")
 
     def __str__(self):
-        return f'facture N°:  {self.id} doit {self.client}'
+        return f'facture N°:  {self.invoice_number} doit {self.client}'
+
+    def save(self, *args, **kwargs):
+        try:
+            last_num = Invoice.objects.last().invoice_number
+            self.invoice_number = last_num =+ 1
+        except:
+            self.invoice_number = 1
+        super().save(*args, **kwargs) 
+        return sum(item.get_cost() for item in self.items.all())
+
+
+    def get_total_cost(self):
+        items_cost = sum(item.get_cost() for item in self.items.all())
+        total_cost = items_cost - self.discount
+        # if total_cost < 0:
+        #     total_cost = 0
+
+        return total_cost
+
+
+
 
 class InvoiceItem(models.Model):
     invoice    = models.ForeignKey(Invoice,related_name='items', verbose_name=(_("Facture")), on_delete=models.CASCADE)
@@ -108,3 +130,4 @@ class InvoiceItem(models.Model):
         return str(self.description)
     def get_cost(self):
         return self.price * self.quantity
+

@@ -1,11 +1,11 @@
 from django import forms
-from .models import Contact
+from .models import Contact, Invoice
 
 class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
         fields = ['name','phone','email','subject','message']
-
+ 
 
 def must_be_empty(value):
     if value:
@@ -19,3 +19,9 @@ class ContactForm(forms.Form):
     honeypot = forms.CharField(required=False,  label="leave empty", validators=[must_be_empty])
     message = forms.CharField()    
 
+class InvoiceCreateForm(forms.ModelForm):
+    class Meta:
+        model = Invoice
+        fields = ('client', 'client_rc', 'client_nif', 'client_art', 'client_adresse', 'invoice_number', 'invioce_date', 'note', 'discount',)
+        required = ('client',)
+       
